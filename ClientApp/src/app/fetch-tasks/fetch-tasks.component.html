@@ -1,0 +1,44 @@
+<h1>Tasks Data</h1>
+
+
+<p>
+  <a [routerLink]="['/create-task']">Create New</a><br>
+  <a [routerLink]="['/update-task']">Edit Task</a>
+</p>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>TaskId</th>
+      <th>Subject</th>
+      <th>CreateTime</th>
+      <th>StartDate</th>
+      <th>DueDate</th>
+      <th>CompletedDate</th>
+      <th>Complete</th>
+      <th>Importance</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngIf="tasksList.length==0">
+     <td>NO Tasks</td>
+    </tr>
+
+    <tr *ngFor="let d of tasksList">
+      <td>{{d.taskId}}</td>
+      <td>{{d.subject}}</td>
+      <td>{{d.createTime}}</td>
+      <td>{{d.startDate}}</td>
+      <td>{{d.dueDate}}</td>
+      <td>{{d.completedDate}}</td>
+      <td>{{d.complete}}</td>
+      <td>{{d.importance}}</td>
+     
+      <td>
+        <a [routerLink]="" (click)="delete(d.taskId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

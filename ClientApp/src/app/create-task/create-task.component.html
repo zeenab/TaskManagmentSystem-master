@@ -1,0 +1,49 @@
+<h1>Create Task</h1>
+
+<div>
+  <div *ngIf="!submitted">
+    <div>
+      <label>Subject</label>
+      <input [(ngModel)]="data.Subject"  placeholder="subject" />
+    </div>
+
+    <div>
+      <label>CreateTime</label>
+      <input [(ngModel)]="data.CreateTime" placeholder="createTime" />
+    </div>
+
+    <div>
+      <label>StartDate</label>
+      <input [(ngModel)]="data.StartDate" placeholder="startDate" />
+    </div>
+
+    <div>
+      <label>DueDate</label>
+      <input [(ngModel)]="data.DueDate" placeholder="dueDate" />
+    </div>
+
+
+    <div>
+      <label>CompletedDate</label>
+      <input [(ngModel)]="data.CompletedDate"  placeholder="completedDate" />
+    </div>
+
+    <div>
+      <label>Complete</label>
+      <input [(ngModel)]="data.Complete" (ngModelChange)="parseTextToBoolean($event)" placeholder="complete" />
+    </div>
+
+    <div>
+      <label>Importance</label>
+      <input [(ngModel)]="data.Importance" placeholder="importance" />
+    </div>
+
+
+    <button (click)="save()" class="button">Submit</button>
+  </div>
+
+  <div *ngIf="submitted">
+    <h4>You submitted successfully!</h4>
+    <a [routerLink]="['/fetch-tasks']">back to tasks list</a><br>
+  </div>
+</div>

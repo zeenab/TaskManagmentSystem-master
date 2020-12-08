@@ -1,0 +1,104 @@
+Comments: 
+
+
+1- In TaskController, Please rename the TaskController to TasksController so it have the same naming convention as other controllers and models. Do this for everthing else, 
+we should have one convention and don't mix things together like task and tasks and category and categories. 
+
+2- In TaskController, please rename the API index to GetAllTasks() since the current name is not reflecting the API job. 
+
+3- Please make all the Methods names starts with Capital letters ( E.g.  _taskRepository.GetAllTasks(),  GetTask(int id), Create([FromBody]TaskView newTask), 
+_taskRepository.CreateTask(task)) and others in all APIs. 
+
+4- In Delete API, after checking if the object exists , you can send the whole object for the repo meothd instead of recalling it inside the repo, 
+you have made the same database operation twice which is getTask. so paa to repo method like this _taskRepository.delete(task); 
+
+5- In Update API, there is no need for two params, you can only pass the TasksView object and try to update it , if update operation was not done sucessfully send to user and exception
+, also in the current code you don't update the object in the db, check API again please. 
+
+6- rename the API index in all Controllers to more meaninngful name, same as comment 2. 
+
+7- Please delete the file WeatherForacstController and any related files to this file beacuse we don't need them in the project.
+
+8- For the View Models, rename al the names in the plural convention as their models and add the word Model so the name view is different from ViewModel i.e they should be liek this:
+TasksViewModel, CategoriesViewModel, TaskCategoriesViewModel 
+
+9- for avoiding many files in the Repository Folder and confusion, we can put the interface and it's class in the same file, E.g. :
+
+  
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TaskManagmentSystem.Models;
+
+namespace TaskManagmentSystem.Repository
+{
+
+    public interface ITaskRepository
+    {
+        public Tasks createTask(Tasks newTask);
+        public Tasks delete(int id);
+        public Tasks getTaskById(int id);
+        public Tasks update(Tasks updatedTask);
+        public IEnumerable<Tasks> getAllTasks();
+        
+    }
+    
+    public class TaskRepository : ITaskRepository
+    {
+        TaskManagmentSystemContext _context;
+
+        public TaskRepository(TaskManagmentSystemContext context) {
+            _context = context;
+        }
+
+        public Tasks createTask(Tasks newTask)
+        {
+            _context.Tasks.Add(newTask);
+            _context.SaveChanges();
+            return newTask;
+        }
+
+        public Tasks delete(int id)
+        {
+            Tasks task = _context.Tasks.Find(id);
+            if (task != null)
+            {
+                _context.Tasks.Remove(task);
+                _context.SaveChanges();
+            }
+            return task;
+        }
+
+        public IEnumerable<Tasks> getAllTasks()
+        {
+           return _context.Tasks;
+        }
+
+        public Tasks getTaskById(int id)
+        {
+         Tasks task = _context.Tasks.Find(id);
+            return task;
+        }
+
+        public Tasks update(Tasks updatedTask)
+        {
+            var task = _context.Tasks.Attach(updatedTask);
+            task.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+            return updatedTask;
+        }
+    }
+}
+
+
+10 - in Update Method in TaskRepository, use the method _context.Tasks.Update(task) instead of attach method. 
+
+
+
+
+
+
+
+
+
