@@ -4,7 +4,7 @@
   <div *ngIf="!submitted">
     <div>
       <label>Subject</label>
-      <input [(ngModel)]="data.Subject"  placeholder="subject" />
+      <input [(ngModel)]="data.Subject" placeholder="subject" />
     </div>
 
     <div>
@@ -25,7 +25,7 @@
 
     <div>
       <label>CompletedDate</label>
-      <input [(ngModel)]="data.CompletedDate"  placeholder="completedDate" />
+      <input [(ngModel)]="data.CompletedDate" placeholder="completedDate" />
     </div>
 
     <div>
@@ -38,9 +38,15 @@
       <input [(ngModel)]="data.Importance" placeholder="importance" />
     </div>
 
-
+    <div>
+      <label>Category Name</label>
+      <select name="categories" id="categories">
+        <option *ngFor="let d of categoriesList" [value]="d.categoryId">{{d.categoryName}}</option>
+      </select>
+    </div>
     <button (click)="save()" class="button">Submit</button>
   </div>
+
 
   <div *ngIf="submitted">
     <h4>You submitted successfully!</h4>

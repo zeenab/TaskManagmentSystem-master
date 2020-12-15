@@ -1,7 +1,8 @@
-input ,select{
-  position:absolute;
-  left:300px;
+input {
+  position: absolute;
+  left: 300px;
 }
+
 .button {
   background-color: #4d88ff;
   border: 1px solid #4d88ff;
@@ -16,7 +17,7 @@ input ,select{
 }
 
   .button:not(:last-child) {
-    border-bottom: none; 
+    border-bottom: none;
   }
 
   .button:hover {

@@ -1,0 +1,24 @@
+<h1>Create Categories</h1>
+
+<div>
+  <div *ngIf="!submitted">
+    <div>
+      <label>Category Id</label>
+      <input [(ngModel)]="data.CategoryId" (ngModelChange)="parseTextToInteger($event)" placeholder="Category Id" />
+    </div>
+
+    <div>
+      <label>Category Name</label>
+      <input [(ngModel)]="data.CategoryName"  placeholder="Category Name" />
+    </div>
+
+
+
+    <button (click)="save()" class="button">Submit</button>
+  </div>
+
+  <div *ngIf="submitted">
+    <h4>You submitted successfully!</h4>
+    <a [routerLink]="['/fetch-categories']">back to categories list</a><br>
+  </div>
+</div>

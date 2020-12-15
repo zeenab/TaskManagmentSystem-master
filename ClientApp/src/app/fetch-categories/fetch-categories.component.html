@@ -1,0 +1,31 @@
+<h1>Categories Data</h1>
+
+
+<p>
+  <a [routerLink]="['/create-category']">Create New</a><br>
+  <a [routerLink]="['/update-category']">Edit category</a>
+</p>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Categoris Id</th>
+      <th>Categories Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngIf="categoriesList.length==0">
+      <td>NO Categories</td>
+    </tr>
+
+    <tr *ngFor="let d of categoriesList">
+      <td>{{d.categoryId}}</td>
+      <td>{{d.categoryName}}</td>
+      <td>
+        <a [routerLink]="" (click)="delete(d.categoryId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { TasksViewModel } from '../../models/TasksViewModel';
 import { catchError } from 'rxjs/operators';
+import { TasksCategoriesViewModel } from '../../models/tasksCategoriesViewModel';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,7 @@ export class TasksService {
   
 
   _url = 'https://localhost:44321/Tasks/'
+  _url2 = 'https://localhost:44321/TasksCategories/'
    
   constructor(private http: HttpClient) { }
 
@@ -44,6 +46,14 @@ export class TasksService {
     return this.http.put<any>(this._url + 'Update', task, httpOptions);
   }
 
+  addTaskCategory(taskCategory: TasksCategoriesViewModel) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>(this._url2 + 'Create', taskCategory, httpOptions);
+  }
 
 
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TasksViewModel } from '../../models/TasksViewModel';
 import { TasksService } from '../services/tasks.service';
 import { NgForm } from '@angular/forms';
+import { CategoriesViewModel } from '../../models/CategoriesViewModel';
+import { CategoriesService } from '../services/categories.service';
+import { TasksCategoriesViewModel } from '../../models/tasksCategoriesViewModel';
 
 @Component({
   selector: 'app-create-task',
@@ -10,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CreateTaskComponent implements OnInit {
   submitted = false;
-
+  categoriesList: CategoriesViewModel[] = [];
   data: TasksViewModel = {
     TaskId: 0,
     Subject: '',
@@ -21,11 +24,20 @@ export class CreateTaskComponent implements OnInit {
     Complete: false,
     Importance: ''
   }
- 
+  
+  categoryData: CategoriesViewModel = {
+    CategoryId: 0,
+    CategoryName:""
+  }
 
-  constructor( private service : TasksService) { }
+  tasksCategories: TasksCategoriesViewModel = {
+    TasksId:0,
+    CategoryId: this.categoryData.CategoryId
+  }
+  constructor(private service: TasksService, private service1: CategoriesService) { }
  
   ngOnInit() {
+    this.getCategories();
   }
 
 
@@ -33,18 +45,43 @@ export class CreateTaskComponent implements OnInit {
     this.data.Complete = Boolean(selected);
   }
 
+
+
+  getCategories() {
+    this.service1.getAll().subscribe(
+      data => {
+        this.categoriesList = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+
+
   save() {
     
-   this.data;
-   this.service.addTask(this.data)
-     .subscribe(response => {
+    this.data;
+    this.tasksCategories;
 
+    this.service.addTask(this.data).subscribe(response => {
           console.log(response);
           this.submitted = true;
         },
         error => {
           console.log(error);
-        });
+      });
+
+    this.service.addTaskCategory(this.tasksCategories).subscribe(response => {
+      console.log(response);
+      this.submitted = true;
+    },
+      error => {
+        console.log(error);
+      });
+
+
   }
 
 

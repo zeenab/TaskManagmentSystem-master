@@ -13,6 +13,10 @@ import { FetchTasksComponent } from './fetch-tasks/fetch-tasks.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { TasksService } from './services/tasks.service';
 import { UpdateTaskComponent } from './update-task/update-task.component';
+import { FetchCategoriesComponent } from './fetch-categories/fetch-categories.component';
+import { CategoriesService } from './services/categories.service';
+import { CreateCategoriesComponent } from './create-categories/create-categories.component';
+import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
 
 
 
@@ -26,6 +30,9 @@ import { UpdateTaskComponent } from './update-task/update-task.component';
     FetchTasksComponent,
     CreateTaskComponent,
     UpdateTaskComponent,
+    FetchCategoriesComponent,
+    CreateCategoriesComponent,
+    UpdateCategoriesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,9 +45,12 @@ import { UpdateTaskComponent } from './update-task/update-task.component';
       { path: 'fetch-tasks', component: FetchTasksComponent},
       { path: 'create-task', component: CreateTaskComponent },
       { path: 'update-task', component: UpdateTaskComponent },
+      { path: 'fetch-categories', component: FetchCategoriesComponent },
+      { path: 'create-category', component: CreateCategoriesComponent },
+      { path: 'update-category', component: UpdateCategoriesComponent },
     ])
-  ],
-  providers: [TasksService],
+  ], 
+  providers: [TasksService, CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
