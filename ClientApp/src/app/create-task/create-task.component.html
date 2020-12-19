@@ -41,7 +41,7 @@
     <div>
       <label>Category Name</label>
       <select name="categories" id="categories">
-        <option *ngFor="let d of categoriesList" [value]="d.categoryId">{{d.categoryName}}</option>
+        <option *ngFor="let d of categoriesList" [ngValue]="d.categoryId">{{d.categoryName}}</option>
       </select>
     </div>
     <button (click)="save()" class="button">Submit</button>

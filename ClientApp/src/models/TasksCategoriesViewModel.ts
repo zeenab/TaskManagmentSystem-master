@@ -1,4 +1,4 @@
 export class TasksCategoriesViewModel {
-  TasksId: number;
+  TaskId: number;
   CategoryId: number;
 }

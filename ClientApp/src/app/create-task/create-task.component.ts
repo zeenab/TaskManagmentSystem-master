@@ -31,7 +31,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   tasksCategories: TasksCategoriesViewModel = {
-    TasksId:0,
+    TaskId: this.data.TaskId,
     CategoryId: this.categoryData.CategoryId
   }
   constructor(private service: TasksService, private service1: CategoriesService) { }
@@ -66,13 +66,12 @@ export class CreateTaskComponent implements OnInit {
     this.tasksCategories;
 
     this.service.addTask(this.data).subscribe(response => {
-          console.log(response);
-          this.submitted = true;
-        },
-        error => {
-          console.log(error);
+      console.log(response);
+      this.submitted = true;
+    },
+      error => {
+        console.log(error);
       });
-
     this.service.addTaskCategory(this.tasksCategories).subscribe(response => {
       console.log(response);
       this.submitted = true;

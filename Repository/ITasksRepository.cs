@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,10 @@ namespace TaskManagmentSystem.Repository
     public class TasksRepository : ITasksRepository
     {
         TaskManagmentSystemContext _context;
-        public TasksRepository(TaskManagmentSystemContext context)
+        private readonly IConfiguration _configuration;
+        public TasksRepository(IConfiguration configuration,TaskManagmentSystemContext context)
         {
+            _configuration = configuration;
             _context = context;
           
         }
@@ -42,8 +45,29 @@ namespace TaskManagmentSystem.Repository
         public Tasks delete(int id)
         {
             Tasks tasks = _context.Tasks.Find(id);
-           //  String sql=" delete from TasksCategories where TaskId=id";
-           // _context.Database.ExecuteSqlCommand(sql);
+            //  String sql=" delete from TasksCategories where TaskId=id";
+            // _context.Database.ExecuteSqlCommand(sql);
+
+
+            string query = @"delete from TasksCategories where TaskId=" + id + @"";
+       
+            string sqlDataSource = _configuration.GetConnectionString("TaskManagmentSystemContext");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+
+
+
+
 
             _context.Tasks.Remove(tasks);
             _context.SaveChanges();

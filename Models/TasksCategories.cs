@@ -8,6 +8,7 @@ namespace TaskManagmentSystem.Models
         public int TaskId { get; set; }
         public int CategoryId { get; set; }
 
+        public int Id { get; set; }
         public virtual Tasks Task { get; set; }
 
         public virtual Categories Categories { get; set; }

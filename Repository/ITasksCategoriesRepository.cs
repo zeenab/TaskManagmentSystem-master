@@ -43,7 +43,6 @@ namespace TaskManagmentSystem.Repository
         {
             TasksCategories tasksCategories = _context.TasksCategories.Find(id);
 
-            _categoriesRepository.delete(id);
             _context.TasksCategories.Remove(tasksCategories);
             _context.SaveChanges();
             

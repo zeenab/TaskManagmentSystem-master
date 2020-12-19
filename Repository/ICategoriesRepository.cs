@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,8 +23,10 @@ namespace TaskManagmentSystem.Repository
     {
         TaskManagmentSystemContext _context;
 
-        public CategoriesRepository(TaskManagmentSystemContext context)
+        private readonly IConfiguration _configuration;
+        public CategoriesRepository(IConfiguration configuration,TaskManagmentSystemContext context)
         {
+            _configuration = configuration;
             _context = context;
         }
 
@@ -37,7 +41,28 @@ namespace TaskManagmentSystem.Repository
         {
             Categories categories = _context.Categories.Find(id);
 
-                _context.Categories.Remove(categories);
+
+
+            string query = @"delete from TasksCategories where CategoryId=" + id + @"";
+
+            string sqlDataSource = _configuration.GetConnectionString("TaskManagmentSystemContext");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+
+
+
+
+            _context.Categories.Remove(categories);
                 _context.SaveChanges();
             return categories;
         }
