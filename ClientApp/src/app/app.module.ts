@@ -17,6 +17,7 @@ import { FetchCategoriesComponent } from './fetch-categories/fetch-categories.co
 import { CategoriesService } from './services/categories.service';
 import { CreateCategoriesComponent } from './create-categories/create-categories.component';
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 
 
@@ -33,6 +34,7 @@ import { UpdateCategoriesComponent } from './update-categories/update-categories
     FetchCategoriesComponent,
     CreateCategoriesComponent,
     UpdateCategoriesComponent,
+    LogInComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,6 +50,7 @@ import { UpdateCategoriesComponent } from './update-categories/update-categories
       { path: 'fetch-categories', component: FetchCategoriesComponent },
       { path: 'create-category', component: CreateCategoriesComponent },
       { path: 'update-category', component: UpdateCategoriesComponent },
+      { path: 'logIn', component: LogInComponent },
     ])
   ], 
   providers: [TasksService, CategoriesService],
