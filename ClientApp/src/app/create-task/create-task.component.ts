@@ -14,6 +14,7 @@ import { TasksCategoriesViewModel } from '../../models/tasksCategoriesViewModel'
 export class CreateTaskComponent implements OnInit {
   submitted = false;
   categoriesList: CategoriesViewModel[] = [];
+
   data: TasksViewModel = {
     TaskId: 0,
     Subject: '',

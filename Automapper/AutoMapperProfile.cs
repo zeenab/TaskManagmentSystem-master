@@ -17,6 +17,8 @@ namespace TaskManagmentSystem.Automapper
             CreateMap<Categories, CategoriesViewModel>().ReverseMap();
 
             CreateMap<TasksCategories, TasksCategoriesViewModel>().ReverseMap();
+           
+            CreateMap<Users, UsersViewModel>().ReverseMap();
 
         }
     }

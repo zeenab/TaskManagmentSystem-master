@@ -18,6 +18,7 @@ namespace TaskManagmentSystem.Models
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<TasksCategories> TasksCategories { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -80,6 +81,26 @@ namespace TaskManagmentSystem.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__TasksCate__TaskI__276EDEB3");
             });
+
+
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK__userId");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("userName");
+
+                entity.Property(e => e.UserPassword)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("userPassword");
+            });
+
 
             OnModelCreatingPartial(modelBuilder);
         }
